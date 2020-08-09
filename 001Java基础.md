@@ -1,15 +1,139 @@
-## Java面试基础问题
+## 基础问题
+
+ ### 1. ArrayList和LinkedList的区别
+
+-   Arraylist内存地址是连续的，底层是数组。随机访问的速度比较快，是常数时间，删除是线性的复杂度。
+
+-   LinkedList内存地址是不连续的，是单链表。随机访问比较差，是线性的，插入删除比较快是常数时间。
+
+    
+
+### 2. 新生代的对象什么时候会进入老年代
+
+1.  当新生代年龄超过了设定值，会进入老年代。
+
+2.  新生代空间装不下了，会进入老年代。
+
+    
+
+### 3. Java内存结构
+
+分为五个部分：程序计数器，虚拟机栈，本地方法栈，堆，方法区。
+
+-   其中程序计数器是用于记录下一条指令的地址。
+
+-   虚拟机栈是线程运行时需要的内存。
+
+-   本地方法栈时运行非Java语言时需要的内存。
+
+-   堆时所有new出来的对象存储的地方。
+
+-   方法区是一个逻辑概念，jdk1.8以后放在metaspace元空间中。
+
+
+
+### 4. synchronized关键字
+
+用于实现对临界资源的保护，是Java中的一种锁机制。
+
+
+
+### 5. violate关键字
+
+
+
+### 6. Reentrantlock关键字
+
+
+
+
+
+### 7. final关键字
+
+用在变量和方法上，表示不可变。
+
+### 8. Spring MVC原理
+
+### 9. HashMap原理，put和resize的过程
+
+
+
+### 10. 线程池有哪些类型
+
+### 11. 类加载过程
+
+分为三步：加载，链接，初始化。
+
+其中验证又分为三小步：验证，准备，解析。
+
+### 12.wait()和sleep()的区别
+
+### 13. String类是如何存的，String的hashCode方法是如何实现的？
+
+
+
+### 14. JVM调优
+
+-   主要是为了减少Full GC的次数。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 1、实习做的项目介绍
- 2、对于springboot的了解
- 3、springmvc原理
- 4、java内存结构
- 5、java锁，sychronized
- 6、violate底层实现
- 7、ArrayList和LinkedList的区别
 
-1. 说说JVM的理解
-2. 新生代的对象什么时候会进入老年代
 3. 让你设计，你会如何设计一个Reentrantlock。
 4. 简单问下JDK1.7 和 JDK 1.8 ConcurrentHashMap 的底层数据结构相关的吧
 5. Thread中 wait（）和sleep（）哪个是会有释放锁的操作？ 
@@ -80,7 +204,7 @@ Java的函数式API  completableFuture stream duration
 1、实习做的项目介绍
  2、对于springboot的了解
  3、springmvc原理
- 4、java内存结构
+ 4、
  5、java锁，sychronized
  6、violate底层实现
  7、ArrayList和LinkedList的区别
@@ -138,3 +262,4 @@ Java的函数式API  completableFuture stream duration
 6. junit返回为空，参数为空。
 
 7. Mono异步流。
+
