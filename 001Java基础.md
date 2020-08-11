@@ -10,15 +10,19 @@
 
 ### 2. 新生代的对象什么时候会进入老年代
 
-1.  当新生代年龄超过了设定值，会进入老年代。
+1. 当新生代年龄超过了设定值，会进入老年代。
 
-2.  新生代空间装不下了，会进入老年代。
+2. 新生代空间装不下了，会进入老年代。
 
-    
+	新生代：老年代 = 1 : 2
+
+	Eden：From：To = 8 : 1 : 1 
+
+	
 
 ### 3. Java内存结构
 
-分为五个部分：程序计数器，虚拟机栈，本地方法栈，堆，方法区。
+分为五个部分：**程序计数器，虚拟机栈，本地方法栈，堆，方法区。**
 
 -   其中程序计数器是用于记录下一条指令的地址。
 
@@ -40,11 +44,19 @@
 
 ### 5. violate关键字
 
+- 保证可见性
+- 禁止内存指令重排
+- 不能保证原子性
+
 
 
 ### 6. Reentrantlock关键字
 
+Lock接口三个实现类：
 
+- 可重入锁
+- 读锁
+- 写锁
 
 
 
@@ -68,198 +80,250 @@
 
 ### 12.wait()和sleep()的区别
 
+
+
 ### 13. String类是如何存的，String的hashCode方法是如何实现的？
 
 
 
 ### 14. JVM调优
 
--   主要是为了减少Full GC的次数。
+-   主要是为了减少Full GC的次数
 
 
 
+### 15. CAS的ABA问题如何解决
 
+CAS: Compare and Set 比较交换
 
+使用版本号机制，每次更新数据前，先判断当前版本号是否和预期的版本号一致，如果不一致则不更新。
 
 
 
+### 16. 垃圾回收算法
 
+- 标记清除mark-sweep
+- 标记整理mark-compact
+- 复制copying
 
+新生代：使用复制算法
 
+老年代：标记整理
 
+CMS： 标记清除，专门用于老年代，可以同时进行垃圾回收和其他任务。
 
 
 
+### 17. Synchronized和Lock的区别
 
+1. Synchronized是java内置的关键字，Lock是一个java接口。
+2. Synchronized无法判断获取锁的状态，Lock可以判断是否获取到了锁。
+3. Synchronized会自动释放锁，Lock必须要手动释放，如果不释放，就会造成死锁。
+4. Synchronized阻塞等待，Lock不一定等待。
+5. Synchronized可重入锁，不可中断，非公平；Lock可重入锁，可以判断锁，公平和非公平可选。
+6. Synchronized适合锁少量的代码同步问题；Lock适合锁大量的同步代码。
 
 
 
+### 18. 创建线程的3中方式
 
+- 继承Thread类
+- 实现Runnable接口
+- 实现Callable接口
 
+### 19. 请描述锁的四种状态和升级过程
 
+- 无锁状态
+- 偏向锁
+- 轻量级
+- 重量级锁
 
+### 20. Forkjoin分支合并
 
+JDK1.7开始引入的功能，用于并行执行任务，把大任务拆分成小任务。
 
+特点：工作窃取，当一个线程任务执行完成之后帮助其他线程执行任务的操作，任务是放在双端队列中的，所有可以从后面取出任务去执行，而不影响当前正在执行其他任务的线程。
 
+### 21. 内存交互的8中操作
 
+- Load
+- Store
+- Read
+- Write
+- Use
+- Assign
+- Lock
+- Unlock
 
+### 22. AQS是什么？
 
+AQS：Abstract Queue Synchronizer 抽象队列同步器
 
+通过维护一个共享资源状态和一个先进先出的线程等待队列，来实现一个多线程访问共享资源的同步框架。
 
+### 23. Volatile的可见性和禁止指令重排是如何实现的？
 
 
 
+### 24. 请描述一下对象的创建过程
 
+### 25. 对象在内存中的内存布局
 
+### 26. DCL单例为什么要加volatile?
 
+### 27. 实现一个线程安全的单例模式
 
+### 28. ThreadLocal如何解决内存泄漏问题？
 
+每次使用完ThreadLocal，都调用它的remove()方法，清除数据。 
 
+### 29. 请描述一下锁的分类以及JDK中的应用
 
+- 无锁状态
 
+- 偏向锁
 
+- 轻量级锁
 
+- 重量级锁
 
+	
 
+### 30. 线程的状态有哪些？
 
+- New
+- Runtime
+- Blocked
+- Waiting
+- Timed_waiting
+- Terminated
 
+### 31. wait和sleep的区别
 
+1. 来自不同的类。wait来自object； sleep来自thread。
+2. 关于锁的释放。wait会释放锁，sleep不会释放。
+3. 使用的范围不同。wait必须在同步代码块中，sleep可以在任何地方。
+4. 是否需要捕获异常。wait不需要，sleep必须要。
 
 
 
+### 32. 什么是反射？
 
+反射机制：在运行时动态地创建类的对象，获取一个类的所有成员变量和方法。
 
+反射的作用：
 
+- 得到一个对象所属的类
+- 获取一个类的所有成员变量和方法
+- 在运行时动态地创建类的对象
+- 在运行时动态地调用对象的方法
 
 
-1、实习做的项目介绍
 
-3. 让你设计，你会如何设计一个Reentrantlock。
-4. 简单问下JDK1.7 和 JDK 1.8 ConcurrentHashMap 的底层数据结构相关的吧
-5. Thread中 wait（）和sleep（）哪个是会有释放锁的操作？ 
-6. 看过AQS源码么，说说你的理解吧。
+### 33. 哪些对象可以作为GCroot
 
-## 面试相关
+- 在虚拟机栈中引用对象
+- 在方法区中常量引用的对象
+- 在本地方法栈中JNI引用的对象
+- Java虚拟机内部的引用
+- 所有被同步锁（synchronized关键字）持有的对象
 
-1. solar和Es的底层都是lunch，如何理解luence工作原理
+### 34. java有几种基本类型，大小？
 
-2. zookeeper的watcher机制
-3. kafka的rebalance机制
-4. rocketmq的原理
-5. ES的聚合和mangoDB的聚合区别
-6. redis的主从同步哨兵缓存穿透和击穿
-7. mysql主从不一致
-8. 分布式锁
-9. 服务注册和发现
-10. 鉴权如何实现
+java有8种基本类型
 
+- Integer
+- Long
+- Double
+- Boolean
+- Short
+- Float
+- Char
+- byte **这个类型容易被忘**
 
 
-reactor实现了响应式编程的思想reactive programing，符合reactive streams规范。
 
-反应式编程框架主要采用了观察者模式。
+### zgc的读屏障和染色指针 
 
-mono和flux是发布者也可以理解为被观察者 publisher   ----> 主动推送数据给subscriber 订阅者也可以叫观察者
+### 怎么对强引用的对象回收 
 
-如果publisher发布消息太快，超过了subscriber的处理速度，这时候就出现了背压backpressure。 
+### 引用计数法具体怎么计数的 
 
-背压---指在异步场景中，被观察者发送事件速度远远超过观察者的处理速度的情况下，一种告诉上游的被观察者降低发送速度的策略。
+### 什么情况会出现栈溢出，怎么处理 
 
-Mono 实现了 org.reactivestreams.Publisher 接口，代表0到1个元素的发布者（Publisher）。
+### java的重写和重载
 
-使用Mono以后，
+### hash冲突解决办法
 
-Reactor 框架主要有两个主要的模块：reactor-core 和 reactor-ipc。前者主要负责 Reactive Programming 相关的核心 API 的实现，后者负责高性能网络通信的实现，目前是基于 Netty 实现的。
+### jvm调优参数有哪些 
 
+### 怎样避免dns劫持 
 
+### 了解hashcode和equals嘛，介绍一下
 
+### 线程池了解吗，线程池工作的原理？线程的生命周期？ 
 
+### Spring框架有了解吗？Spring框架中AOP，IOC分别介绍一下。 AOP怎么实现的动态代理
 
-reactor用于创建高效的响应式系统。
+### 
 
-Java的函数式API  completableFuture stream duration
+### 
 
-具有背压的控制能力
+### 
 
+### hashmap的实现，haspmap并发时线程安全么，不安全的话怎么解决呢 
 
+### spring　bean的生命周期 
 
-出A/B test 方案  提升点击率 团体自发需求 共建TAM 数据上报
+### OOM有哪些，排查工具 
 
-303和307是对302的细化
+### 并发三要素（原子性，可见性，有序性）如何保证，实现原理 
 
+### concurrenthashmap如何保证线程安全的 
 
+### Spring循环依赖如何解决 
 
-301 move permanently
+### MVCC 
 
-302 found POST方法的重定向在未询问用户的情况下就变成GET
+### String StringBuffer StringBuilder区别 
 
-303 see other  POST重定向为GET
+### 线程池用过没，线程池的参数什么意思，每个都问了一遍
 
-307 temporary redirect  当客户端的POST请求收到服务端307状态码响应时，需要跟用户询问是否应该在新URI上发起POST方法，也就是说，307是不会把POST转为GET的。
+### 拒绝策略说一说
 
 
 
-## 面试题
+## springboot 2.X
 
-1、实习做的项目介绍
- 2、对于springboot的了解
- 3、springmvc原理
- 4、
- 5、java锁，sychronized
- 6、violate底层实现
- 7、ArrayList和LinkedList的区别
+- 对于业务类使用注解
 
-1. 说说JVM的理解
-2. 新生代的对象什么时候会进入老年代
-3. 让你设计，你会如何设计一个Reentrantlock。
-4. 简单问下JDK1.7 和 JDK 1.8 ConcurrentHashMap 的底层数据结构相关的吧
-5. Thread中 wait（）和sleep（）哪个是会有释放锁的操作？ 
-6. 看过AQS源码么，说说你的理解吧。
+对于MVC开发，控制器使用@Controller,业务层使用@Service，持久层使用@Repository。
 
+- 对于公用的Bean使用xml
 
+如数据库redis,第三方资源等
 
-## 回顾
+SpringBoot框架是让Spring更加容易得到快速的使用。Spring Boot以注解为主的开发。
 
-1. lambda表达式只能用于函数式接口：小括号 箭头 花括号。supplier consumer andThen
+约定优于配置，这是Spring Boot的主导思想。
 
-2. stream流，函数式编程，代码简洁。map filter limit count。
+使得开发人员的配置更少，更加直接地开发项目。
 
-3. Java五大内存区：
 
-   ```java
-   方法区 
-   heap 
-   程序计数器 
-   虚拟机栈 
-   本地方法栈
-   ```
 
-   线程共享：
+Spring MVC的视图解析器的作用主要是定位视图，也就是当控制器只是返回一个逻辑名称的时候，是没有办法直接对应找到视图的，这就需要视图解析器进行解析了。
 
-   ```java
-   方法区 
-   heap
-   ```
+IoC是一种通过描述来生成或者获取对象的技术，而这个技术不是Spring甚至不是Java独有的。
 
-   线程私有：
 
-   ```
-   程序计数器 
-   虚拟机栈 
-   本地方法栈
-   ```
 
-4. 反射：在运行时，动态的获取某个类的属性和方法。
+**在Spring中把每一个需要管理的对象称为Spring Bean（简称Bean），而Spring管理这些Bean的容器，被我们称为Spring IoC容器（或者简称IoC容器）。**
 
-5. 获取class对象的三种方式：
 
-   ```
-   类名.class   
-   对象.getClass()         
-   全类名获取 Class.forName(全类名)
-   ```
 
-6. junit返回为空，参数为空。
+Spring IoC容器是一个管理Bean的容器，在Spring的定义中，它要求所有的IoC容器都需要实现接口BeanFactory，它是一个顶级容器接口。
 
-7. Mono异步流。
+```java
+@SpringBootApplication
+```
 

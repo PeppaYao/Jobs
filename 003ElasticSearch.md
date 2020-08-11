@@ -8,10 +8,10 @@
 
 节点类型：
 
-	- master node
-	- Coordinating node
-	- data node
-	- ingest node
+- master node
+- Coordinating node
+- data node
+- ingest node
 
 
 
