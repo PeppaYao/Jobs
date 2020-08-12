@@ -293,37 +293,3 @@ java有8种基本类型
 
 
 
-## springboot 2.X
-
-- 对于业务类使用注解
-
-对于MVC开发，控制器使用@Controller,业务层使用@Service，持久层使用@Repository。
-
-- 对于公用的Bean使用xml
-
-如数据库redis,第三方资源等
-
-SpringBoot框架是让Spring更加容易得到快速的使用。Spring Boot以注解为主的开发。
-
-约定优于配置，这是Spring Boot的主导思想。
-
-使得开发人员的配置更少，更加直接地开发项目。
-
-
-
-Spring MVC的视图解析器的作用主要是定位视图，也就是当控制器只是返回一个逻辑名称的时候，是没有办法直接对应找到视图的，这就需要视图解析器进行解析了。
-
-IoC是一种通过描述来生成或者获取对象的技术，而这个技术不是Spring甚至不是Java独有的。
-
-
-
-**在Spring中把每一个需要管理的对象称为Spring Bean（简称Bean），而Spring管理这些Bean的容器，被我们称为Spring IoC容器（或者简称IoC容器）。**
-
-
-
-Spring IoC容器是一个管理Bean的容器，在Spring的定义中，它要求所有的IoC容器都需要实现接口BeanFactory，它是一个顶级容器接口。
-
-```java
-@SpringBootApplication
-```
-
