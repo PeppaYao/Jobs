@@ -265,12 +265,6 @@ java有8种基本类型
 
 ### Spring框架有了解吗？Spring框架中AOP，IOC分别介绍一下。 AOP怎么实现的动态代理
 
-### 
-
-### 
-
-### 
-
 ### hashmap的实现，haspmap并发时线程安全么，不安全的话怎么解决呢 
 
 ### spring　bean的生命周期 

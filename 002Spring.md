@@ -366,8 +366,7 @@ Properties类型时啥
   <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-  </dependencies>
+  </dependency>
   ```
 
   
@@ -523,7 +522,7 @@ Properties类型时啥
   }
   ```
 
-  ### 7、Java配置
+  ### 7、SpringBoot注解
 
   Java配置主要靠Java类和以歇注解来达到xml配置一样的效果。
 
@@ -543,6 +542,71 @@ Properties类型时啥
   - 构造函数
   - 方法形参
   - ConfigurationProperties(prefix="jdbc")直接加在方法上
+
+### 8、SpringBoot集成Redis
+
+- 单元测试代码
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = DemoApplication.class)
+public class RedisTest {
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    @Test
+    public void test(){
+        //1.从redis获取数据
+        String result = redisTemplate.boundValueOps("yao").get();
+
+        //2.判断对应的数据是否存在
+        if(result==null){
+            System.out.println("数据不存在...");
+        }else{
+            System.out.println("数据存在..."+result);
+        }
+    }
+}
+```
+
+- 配置文件代码
+
+```xml
+  <dependencies>
+<!--起步依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+<!--web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+<!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+<!--junit-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.3.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.2.8.RELEASE</version>
+        </dependency>
+    </dependencies>
+```
+
+
 
   ## springboot 2.X
 
