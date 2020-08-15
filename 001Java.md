@@ -116,11 +116,11 @@ CMS： 标记清除，专门用于老年代，可以同时进行垃圾回收和�
 
 ### 17. Synchronized和Lock的区别
 
-1. Synchronized是java内置的关键字，Lock是一个java接口。
+1. **Synchronized是java内置的关键字，Lock是一个java接口。**
 2. Synchronized无法判断获取锁的状态，Lock可以判断是否获取到了锁。
-3. Synchronized会自动释放锁，Lock必须要手动释放，如果不释放，就会造成死锁。
+3. **Synchronized会自动释放锁，Lock必须要手动释放，如果不释放，就会造成死锁。**
 4. Synchronized阻塞等待，Lock不一定等待。
-5. Synchronized可重入锁，不可中断，非公平；Lock可重入锁，可以判断锁，公平和非公平可选。
+5. **Synchronized可重入锁，不可中断，非公平**；Lock可重入锁，可以判断锁，公平和非公平可选。
 6. Synchronized适合锁少量的代码同步问题；Lock适合锁大量的同步代码。
 
 
@@ -169,7 +169,7 @@ JDK1.7开始引入的功能，用于并行执行任务，把大任务拆分成�
 
 AQS：Abstract Queue Synchronizer 抽象队列同步器
 
-通过维护一个共享资源状态和一个先进先出的线程等待队列，来实现一个多线程访问共享资源的同步框架。
+**通过维护一个共享资源状态和一个先进先出的线程等待队列，来实现一个多线程访问共享资源的同步框架。**
 
 ### 23. Volatile的可见性和禁止指令重排是如何实现的？
 
