@@ -167,7 +167,9 @@ ES集群选主操作采用bully算法。
 
 用于确定文档存储在哪个索引的哪个分片上。
 
+```json
 shard = hash(routing) % number_of_primary_shards
+```
 
 文档所在分片等于routing的hash值除以主分片数量的余数
 
