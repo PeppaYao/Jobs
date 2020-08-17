@@ -69,14 +69,59 @@ Object object = constructor1.newInstance("姚军","24");
 method.invoke(object,"alex");
 ```
 
-### 6、注解
 
-没看懂
 
-### 7、内部类
+### 9、Java八大基本数据类型
 
-不了解
+- int 4字节
+- long 8字节
+- float 4字节
+- double 8字节
+- char **2字节**
+- byte 1字节
+- boolean 1字节
+- short   2字节
 
-### 8、序列化
+### 10、==和equals
 
-不了解
+==判断地址
+
+equals判断内容
+
+
+
+### 11、深浅拷贝
+
+clone
+
+
+
+### 12、红黑树
+
+红黑树特性
+
+红黑树相对于AVL树快在哪儿
+
+
+
+### 13、KMP
+
+
+
+### 14、快排
+
+
+
+### 15、堆排
+
+
+
+### 16、归并排
+
+
+
+### 17、this
+
+通过谁调用的方法，谁就是this
+
+this关键字可以解决同名冲突，如果不加this，则优先使用局部变量。
