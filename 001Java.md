@@ -66,13 +66,19 @@ Lock接口三个实现类：
 
 ### 8. Spring MVC原理
 
-
+客户端请求通过中央控制器，dispatcherServlet分发到对应的handlermapping，结果返回后，由dispatcher
 
 ### 9. HashMap原理，put和resize的过程
 
 
 
 ### 10. 线程池有哪些类型
+
+- 单线程池
+- 固定线程池
+- 缓存线程池
+- 工作窃取线程池
+- 调度线程池
 
 
 
@@ -86,11 +92,18 @@ Lock接口三个实现类：
 
 
 
+### 13.maven依赖冲突
+
+- 锁定版本：dependencyManagement + dependency
+- 排除依赖：exclusions
+- 依赖调节原则：第一声明优先，路径近者优先（直接依赖>间接依赖）
+
 ### 14. JVM调优
 
 -   主要是为了减少Full GC的次数
-
-
+-   主要调节非标准参数-XX开头的参数，比如-Xms堆内存初始化大小，-Xmx堆内存最大大小
+-   Java程序运行时显示jvm参数fprintflagfinal
+-   查看Java进程的jvm参数jinfo -flags 进程ID
 
 ### 15. CAS的ABA问题如何解决
 

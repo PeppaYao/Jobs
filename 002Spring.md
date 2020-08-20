@@ -150,18 +150,30 @@ com.bytedance.dao.impl.UserDaoImpl@3dfc5fb8
 - constructor
 - autodetect
 
-### 10、AOP的5中通知类型
+### 10、AOP的5中通知类型★★★
 
-- 前置通知
-- 后置通知
-- 成功通知
-- 异常通知
-- 环绕通知
+- 前置通知 @before
+- 后置通知 @after_returning
+- 最终通知 @after 无论是否异常都执行
+- 异常通知 @after_throwing
+- 环绕通知 @around
+
+**切点表达式**
+
+```xml
+execution( * com.bytedance.aop.*.*(..))
+```
+
+**切点表达式的抽取**
+
+@Pointcut(切点表达式)
+
+
 
 ### 11、AOP的2中代理方式
 
-- JDK
-- CGLib
+- JDK：基于接口
+- CGLib：基于父类
 
 Spring提供了**JDK和CGLib** 2种方式来生成代理对象，具体生成代理对象的方式由AopProxyFactory根据AdvisedSupport对象的配置来决定。
 
@@ -340,6 +352,8 @@ Properties类型时啥
         <property name="age" value="20"></property>
     </bean>
 ```
+
+
 
 ## SpringBoot笔记
 

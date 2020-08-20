@@ -72,10 +72,16 @@ class Ticket2 {
 ### 3、Synchronized和lock的区别
 
 1. synchronized时Java内置的关键字，lock是一个接口
-2.  synchronized会自动释放锁，lock需要手动释放。
+2. synchronized会自动释放锁，lock需要手动释放。
 3. synchronized线程获取方式是阻塞等待，而lock可以尝试获取锁。
 4. synchronized是非公平锁，Lock可以设置公平与非公平
 5. synchronized适合锁少量的同步代码，lock适合锁大量的同步代码。
+
+**Lock的主要特性**
+
+- 尝试非阻塞地获取锁
+- 能被中断地获取锁
+- 超时获取锁
 
 ### 4、synchronized版的生产者消费者模式
 
@@ -546,6 +552,8 @@ public class VolatileT {
 - 传递数据：我们可以通过ThreadLocal在同一线程，不同组件中传递公共变量
 - 线程隔离：**每个线程的变量都是独立的，不会相互影响**
 
+
+
 ```java
 /*线程隔离：线程A只能获取到线程A设置的变量*/
 public class LocalT {
@@ -807,6 +815,11 @@ public class MyPool {
 
 **４种拒绝策略**
 
+- AbortPolicy：直接抛出异常
+- CallerRunsPolicy：调用者线程来运行该任务
+- DiscardPolicy：不处理，直接丢弃。
+- DiscardOldPolicy：尝试与最早的任务任务竞争
+
 ```java
 /*
 * new ThreadPoolExecutor.AbortPolicy()); //银行满了，还有人进来，不处理这个人的，抛出异常 
@@ -820,6 +833,13 @@ public class MyPool {
 
 - CPU密集型：与电脑核数相同
 - IO密集型：大于耗时IO的数量即可，通常设为耗时IO的两倍。
+
+向线程池提交任务：
+
+- execute()用于提交不需要返回值的任务，无法判断任务是否被线程池执行成功。
+- submit()用于提交需要返回值的任务，线程池会返回一个future类型的对象，通过这个future对象可以判断任务是否执行成功，并可以通过get方法获取返回值。
+
+
 
 ### 20、创建线程的三种方式
 
@@ -888,4 +908,63 @@ class MyCall implements Callable {
     }
 }
 ```
+
+### 21、AQS同步器
+
+同步器是实现Lock锁的关键。许多同步类的实现都依赖于AQS，如Reentrantlock, Semaphore, CountDownLatch
+
+锁是面向使用者，同步器是面向锁的实现者。
+
+AQS为每个共享资源都设置了一个共享资源锁，线程在需要访问共享资源时首先需要获取**共享资源锁**，如果获取到了共享资源锁，便可以在当前线程中使用该共享资源，如果获取不到，则将线程放入线程等待队列，等待下一次调度。
+
+AQS维护了一个**volatile int类型的变量state**，用于表示当前的**同步状态**。
+state的访问方式有三种：getState() setState() compareAndSetState()均是原子操作。
+
+AQS共享资源的方式：
+
+- 独占式
+- 共享式
+
+AQS只是一个框架，自定义同步器需要重写**获取和释放**方法
+
+- tryAcquire() 
+- tryRelease() 
+- isHeldExclusively() 
+- tryAcquireShared() 
+- tryReleaseShared() 
+
+### 22、锁的四种状态和升级过程
+
+**并且四种状态会随着竞争的情况逐渐升级，而且是不可逆的过程，即不可降级，也就是说只能进行锁升级（从低级别到高级别），不能锁降级（高级别到低级别）** 
+
+- 无锁
+- 偏向锁(默认锁)：适用于只有一个线程访问同步块场景 
+- 轻量级锁(有线程竞争时，自旋10次后升级)
+- 重量级锁(synchronized)
+
+### 23、Fork/Join
+
+Fork/Join框架是Java 7提供的一个用于并行执行任务的框架，是一个把大任务分割成若干个小任务，最终汇总每个小任务结果得到大任务结果的框架。
+
+工作窃取work-stealing：是指某个线程从其他线程队列中窃取任务来执行。
+
+### 24、happens-before
+
+- as-if-serial语义保证单线程内程序的执行结果不改变
+- happens-before关系保证正确同步的多线程程序的执行结果不改变
+
+如果A happens-before B，那么Java内存模型向程序员保证，A操作的结果将对B可见，且A的执行顺序排在B之前。
+
+as-if-serial语义和happens-before这样做的目的，都是为了在不改变程序执行结果的前提下，尽可能地提高程序执行的并行度。
+
+### 25、四种引用
+
+- 强引用：把一个对象赋值给一个引用变量时，这个引用变量就是强引用。有强引用的对象一定为可达性状态，所以不会被垃圾回收机制回收。
+- 软引用：如果一个对象只有软引用，则在系统内存空间不足时该对象将被回收
+- 弱引用：如果一个对象只有弱引用，则在垃圾回收时一定会被回收
+- 虚引用：虚引用和引用队列联合使用，主要用于跟踪对象的垃圾回收状态。
+
+
+
+
 
