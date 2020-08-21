@@ -1,4 +1,4 @@
-## 1. 概念 
+## 概念 
 
 Kafka的核心概念有Producer、Consumer、Broker和Topic。
 
@@ -20,7 +20,7 @@ Partition的个数为3，则集群中最多同时有3个线程的消费者并发
 
 ![1597543184266](C:\Users\Yao\AppData\Local\Temp\1597543184266.png)
 
-### 2. 文件存储
+### 文件存储★★★
 
 每个Partition分为多个segment，每个segment对应两个文件.index和.log
 
@@ -38,7 +38,7 @@ Partition中的每条Message都包含3个属性：**Offset、MessageSize、Data*
 
 
 
-### 3. 消费者
+### 消费者
 
 Consumer通过Pull方式消费消息。Kafka不删除已消费的消息。
 
@@ -48,12 +48,12 @@ Consumer通过Pull方式消费消息。Kafka不删除已消费的消息。
 
 
 
-### 4. 分区的原因
+### 分区的原因
 
 - 方便在集群中**扩展**。每个partition可以通过调整大小以适应它所在的机器，而一个topic又可以由多个partition组成，因此整个集群就可以适应任意大小的数据了。
 - 可以**提高并发**。因为可以以partition为单位读写了。
 
-### 5. 数据可靠性保证
+### 数据可靠性保证★★★
 
 leader和follower
 
@@ -67,13 +67,13 @@ LEO：log end offset 最新消息
 
 ISR：leader维护了一个动态的ISR，表示和leader保持同步的follower集合。当ISR中的follower完成数据的同步之后，leader就会给producer发送ack。如果follower长时间未向leader同步数据，则该follower将被踢出ISR。leader发生故障以后，就会从ISR中选举新的leader。
 
-### 6. ACK应答机制
+### ACK应答机制★★★
 
 - ack=1：producer等待broker的ack，partition的leader落盘成功后返回ack，如果在follower同步成功之前leader故障，那么将会丢失数据。
 - ack=0：producer不等待broker的ack，低延迟，broker一旦接收到数据还没有写入磁盘就已经返回了，当broker故障时有可能丢失数据。
 - ack=-1(all)：producer等待broker的ack，partition的leader和follower(指的是ISR中的follower)全部落盘成功后才返回ack。但是如果在follower同步完成后，broker发送ack之前，leader发生故障，那么会造成**数据重复**
 
-### 7. Exactly Once
+### Exactly Once★★★
 
 精准一次性：数据不重复不丢失
 
