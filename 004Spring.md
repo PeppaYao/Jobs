@@ -50,7 +50,6 @@ Spring默认的代理对象生成策略为：如果是**目标类接口**，则�
 - 实例化Bean
 - Bean配置
 - 执行setBeanName(String)
-- ...
 
 ### AOP的通知类型★★
 
