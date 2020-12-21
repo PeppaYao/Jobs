@@ -14,9 +14,9 @@ HashMap数组+链表或红黑树存储数据，**线程不安全**
 
 Java 8以后，链表中的元素超过8后，hashmap会将链表结构转换为红黑树的结构提高查询效率。
 
-线程安全版：HashTable和ConcurrentHashMap
+线程安全版：Hashtable和ConcurrentHashMap
 
-HashTable并发性不如ConcurrentHashMap，基本弃用了。
+Hashtable并发性不如ConcurrentHashMap，基本弃用了。
 
 ConcurrentHashMap分段锁实现并发操作，线程安全。
 
